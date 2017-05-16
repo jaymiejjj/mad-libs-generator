@@ -46,7 +46,7 @@ def get_level(quiz_num):
 1 - 中等
 2 - 苦难
 3 - 专家级'''
-    level = raw_input(u"请选择您要挑战的难度（请输入数字0-{quiz_num}）： ".
+    level = raw_input("请选择您要挑战的难度（请输入数字0-{quiz_num}）： ".
                       format(quiz_num=quiz_num - 1))
 
     while True:
