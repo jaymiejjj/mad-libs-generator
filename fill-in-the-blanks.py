@@ -3,10 +3,12 @@ import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
+
 def generate_quiz():
+    # 创建测验问题的字典
     tips0 = u"这个八岁的男孩酷爱弹钢琴，以致于他坚持练琴三年了。"
-    sample0 = "The eight-year-old girl likes playing the piano __1__ much __2__ he has kept __3__ for three years."
-    answer0 = ['so', 'that', 'practicing']
+    sample0 = "The eight-year-old girl likes __1__ the piano __2__ much __3__ he has kept __4__ for three years."
+    answer0 = ['playing', 'so', 'that', 'practicing']
 
     tips1 = u"由于天气不好，校运会不得不推迟。"
     sample1 = "__1__ __2__ the bad weather, the school sports meet had to __3__ __4__ __5__."
@@ -34,6 +36,7 @@ def generate_quiz():
 
 
 def get_level(quiz_num):
+    # 获取用户输入的等级
     print u'''###################################
 欢迎来到单词填空挑战,如果中途您想退出游戏，请输入end
 0 - 简单
@@ -56,11 +59,12 @@ def get_level(quiz_num):
 
 
 def get_quiz(level, quiz_zip):
+    # 根据用户输入的等级返回相应的quiz
     return quiz_zip[level]
 
 
 def get_alllow_wrong_time():
-
+    # 获取允许用户输错的最大次数
     wrong_times = raw_input(u"请输入您可以允许自己回答错误的次数（1-10）")
 
     while True:
@@ -77,11 +81,13 @@ def get_alllow_wrong_time():
 
 
 def get_blank_num(sample):
+    # 获取改问题中需要回答的问题个数
     sample_lst = sample.split()
     return len([i for i in sample_lst if "__" in i])
 
 
 def fill_blank(tip, sample, answer, wrong_times):
+    # 开始填写问题
     print "###################################"
     print u"{tip}".format(tip=tip)
     print "{sample}".format(sample=sample)
@@ -103,11 +109,15 @@ def fill_blank(tip, sample, answer, wrong_times):
             print(u"恭喜您第{n}个单词填写正确,您还有{times}次机会".format(times=wrong_times-count, n=n+1))
             sample = sample.replace("__{n}__".format(n=n+1), input_answer)
             print sample
+
         if count == wrong_times:
             break
         print u"恭喜您完成测试"
+        break
 
-    print u"很遗憾，挑战失败，您已经没有机会再挑战了！"
+    if count == wrong_times:
+        print u"很遗憾，挑战失败，您已经没有机会再挑战了！"
+
 
 
 def main():
